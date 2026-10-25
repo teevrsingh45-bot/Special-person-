@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Surprise For You ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #ffeef2 0%, #ffd1dc 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      overflow: hidden;
+    }
+    .card-container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      min-height: 480px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      animation: fadeIn 0.6s ease forwards;
+    }
+    .page.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .icon {
+      font-size: 52px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    h2 {
+      color: #ff3366;
+      font-size: 24px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    p {
+      color: #555555;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .btn {
+      background: linear-gradient(45deg, #ff4b72, #ff758c);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(255, 75, 114, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 75, 114, 0.45);
+    }
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      position: relative;
+      width: 100%;
+      justify-content: center;
+      min-height: 50px;
+    }
+    .btn-no {
+      background: #e0e0e0;
+      color: #777;
+      box-shadow: none;
+      position: absolute;
+    }
+    .page-indicator {
+      position: absolute;
+      bottom: 16px;
+      font-size: 13px;
+      color: #aaa;
+    }
+    .confetti {
+      position: absolute;
+      font-size: 24px;
+      animation: flyUp 3s linear forwards;
+    }
+    @keyframes flyUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+    
+    <!-- Page 1 -->
+    <div class="page active" id="page-1">
+      <div class="icon">💌</div>
+      <h2>Hey Beautiful...</h2>
+      <p>I built this little card just for you. Take a deep breath and flip forward!</p>
+      <button class="btn" onclick="nextPage(2)">Open Card ✨</button>
+      <span class="page-indicator">1 / 5</span>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page" id="page-2">
+      <div class="icon">✨</div>
+      <h2>Ever Since We Met...</h2>
+      <p>Ordinary days started feeling special. Every conversation with you makes my whole day brighter.</p>
+      <button class="btn" onclick="nextPage(3)">Next 🌸</button>
+      <span class="page-indicator">2 / 5</span>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="page" id="page-3">
+      <div class="icon">🧸</div>
+      <h2>Just One Thing...</h2>
+      <p>Your smile is my absolute favorite thing in the world, and being around you feels like home.</p>
+      <button class="btn" onclick="nextPage(4)">One more click 💫</button>
+      <span class="page-indicator">3 / 5</span>
+    </div>
+
+    <!-- Page 4 -->
+    <div class="page" id="page-4">
+      <div class="icon">🙈</div>
+      <h2>My Heart is Beating Fast...</h2>
+      <p>I gathered all my courage today to finally tell you what I've been feeling for so long...</p>
+      <button class="btn" onclick="nextPage(5)">Turn to the last page 💖</button>
+      <span class="page-indicator">4 / 5</span>
+    </div>
+
+    <!-- Page 5 (Proposal) -->
+    <div class="page" id="page-5">
+      <div class="icon">💍</div>
+      <h2>Will you be my girlfriend?</h2>
+      <p>I promise to make you laugh, care for you, and stand by you always. What do you say?</p>
+      <div class="btn-group">
+        <button class="btn" onclick="celebrate()">Yes, I will! ❤️</button>
+        <button class="btn btn-no" id="no-btn" onmouseover="dodgeBtn()" onclick="dodgeBtn()">No</button>
+      </div>
+      <span class="page-indicator">5 / 5</span>
+    </div>
+
+    <!-- Success Celebration Screen -->
+    <div class="page" id="page-success">
+      <div class="icon">🥰🎉</div>
+      <h2>You Just Made Me The Happiest!</h2>
+      <p>Thank you for choosing us. I cannot wait to make countless beautiful memories with you. ❤️</p>
+    </div>
+
+  </div>
+
+  <script>
+    function nextPage(pageNum) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const next = document.getElementById(`page-${pageNum}`);
+      if (next) next.classList.add('active');
+    }
+
+    function dodgeBtn() {
+      const btn = document.getElementById('no-btn');
+      const randomX = (Math.random() - 0.5) * 200;
+      const randomY = (Math.random() - 0.5) * 150;
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    function celebrate() {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-success').classList.add('active');
+
+      const emojis = ['❤️', '💖', '✨', '🌹', '🎉'];
+      for (let i = 0; i < 40; i++) {
+        const span = document.createElement('span');
+        span.className = 'confetti';
+        span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.animationDelay = (Math.random() * 1.5) + 's';
+        span.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        document.body.appendChild(span);
+      }
+    }
+  </script>
+</body>
+</html>
